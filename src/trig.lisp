@@ -90,11 +90,14 @@
      (angle 0))
   (background +white+)
   (incf angle speed)
+  ;; As the circle needs to rotate around a fixed point, the sin and
+  ;; the cosine angles are going to change. The x-axis is always
+  ;; rCos(A) and y-axis is always rSin(A). If we can change these
+  ;; values over time, the circle will be shown as rotating. 
   (let ((x (+ center-x (* 10 radius (cos angle))))
         (y (+ center-y (* 10 radius (sin angle)))))
+    ;; Add a sun and make earth rotate around it.
     (with-pen (make-pen :fill +orange+)
       (circle center-x center-y 20))
     (with-pen (make-pen :fill +blue+ :stroke +green+)
-      ;; Since the y keeps on  changing with every tick, the circle
-      ;; seems to be jumping.
       (circle x y (* 0.2 radius)))))

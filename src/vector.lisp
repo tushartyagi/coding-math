@@ -16,15 +16,8 @@
     (line 0 0 25 25)
     (circle 25 25 25)))
 
-
-
-
-
-
 (defsketch tutorial ()
   (rect 100 100 100 100))
-
-
 
 (defsketch tutorial ()
   (dotimes (i 10)
