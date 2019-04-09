@@ -62,13 +62,12 @@
       ;; seems to be jumping.
       (circle center-x y 15))))
 
-
 (defsketch growing-circle
     ((width 800) (height 600)
      (center-x (* height 0.5))
      (center-y (* width  0.5))
      (offset   (* height 0.3))
-     (speed 0.05)
+     (speed 0.01)
      (angle 0))
   (background +white+)
   (incf angle speed)
@@ -81,3 +80,21 @@
       ;; Since the y keeps on  changing with every tick, the circle
       ;; seems to be jumping.
       (circle center-x center-y radius))))
+
+(defsketch rotating-circle
+    ((width 800) (height 600)
+     (center-x (* height 0.5))
+     (center-y (* width  0.5))
+     (radius 10)
+     (speed 0.05)
+     (angle 0))
+  (background +white+)
+  (incf angle speed)
+  (let ((x (+ center-x (* 10 radius (cos angle))))
+        (y (+ center-y (* 10 radius (sin angle)))))
+    (with-pen (make-pen :fill +orange+)
+      (circle center-x center-y 20))
+    (with-pen (make-pen :fill +blue+ :stroke +green+)
+      ;; Since the y keeps on  changing with every tick, the circle
+      ;; seems to be jumping.
+      (circle x y (* 0.2 radius)))))
