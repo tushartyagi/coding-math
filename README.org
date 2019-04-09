@@ -1,0 +1,4 @@
+* coding-math
+
+Solutions to the [[https://www.youtube.com/user/codingmath/videos][coding-math]] youtube channel, written in Common Lisp (inspired by [[http://stevelosh.com/blog/2018/08/a-road-to-common-lisp/#make-something][SJL]]).
+
