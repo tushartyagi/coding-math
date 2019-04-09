@@ -85,7 +85,8 @@
     ((width 800) (height 600)
      (center-x (* height 0.5))
      (center-y (* width  0.5))
-     (radius 10)
+     (x-radius 10)
+     (y-radius 20)
      (speed 0.05)
      (angle 0))
   (background +white+)
@@ -94,10 +95,32 @@
   ;; the cosine angles are going to change. The x-axis is always
   ;; rCos(A) and y-axis is always rSin(A). If we can change these
   ;; values over time, the circle will be shown as rotating. 
-  (let ((x (+ center-x (* 10 radius (cos angle))))
-        (y (+ center-y (* 10 radius (sin angle)))))
+  (let ((x (+ center-x (* 10 x-radius (cos angle))))
+        (y (+ center-y (* 10 y-radius (sin angle)))))
     ;; Add a sun and make earth rotate around it.
     (with-pen (make-pen :fill +orange+)
       (circle center-x center-y 20))
-    (with-pen (make-pen :fill +blue+ :stroke +green+)
-      (circle x y (* 0.2 radius)))))
+    (with-pen (make-pen :fill +yellow+ :stroke +green+)
+      (circle x y (* 2 x-radius)))))
+
+(defsketch lissajous-curves
+    ((width 800) (height 600)
+     (center-x (* height 0.5))
+     (center-y (* width  0.5))
+     (x-radius 10)
+     (y-radius 20)
+     (x-angle 0)
+     (y-angle 0)
+     (speed 0.05)
+     (angle 0))
+  (background +white+)
+  ;; Here the angles of both x and y change at different speeds.
+  ;; Therefore, both the angle and the speeds need to be separated
+  ;; out.
+  (incf x-angle (* 1.3 speed))
+  (incf y-angle (* 0.5 speed))
+  (let ((x (+ center-x (* 10 x-radius (cos x-angle))))
+        (y (+ center-y (* 10 y-radius (sin y-angle)))))
+    ;; Add a sun and make earth rotate around it.
+    (with-pen (make-pen :fill +red+ :stroke +green+)
+      (circle x y (* 1 x-radius)))))
