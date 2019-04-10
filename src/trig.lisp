@@ -119,8 +119,51 @@
   ;; out.
   (incf x-angle (* 1.3 speed))
   (incf y-angle (* 0.5 speed))
-  (let ((x (+ center-x (* 10 x-radius (cos x-angle))))
+  (let ((x (+ center-x (* 10 x-radius (sin x-angle))))
         (y (+ center-y (* 10 y-radius (sin y-angle)))))
     ;; Add a sun and make earth rotate around it.
     (with-pen (make-pen :fill +red+ :stroke +green+)
       (circle x y (* 1 x-radius)))))
+
+
+(defsketch n-objects
+    ((width 800) (height 600)
+     (center-x (* height 0.33))
+     (center-y (* width  0.25))
+     (x-radius 10)
+     (y-radius 20)
+     (n-objects 100)
+     (object-radius 1)
+     (x-angle 0)
+     (y-angle 0)
+     (speed 0.05)
+     (angle 0))
+  (background +white+)
+  ;; Here the angles of both x and y change at different speeds.
+  ;; Therefore, both the angle and the speeds need to be separated
+  ;; out.
+  (incf x-angle (* 1 speed))
+  (incf y-angle (* 1 speed))
+  (let ((x (+ center-x (* 10 x-radius (sin x-angle))))
+        (y (+ center-y (* 10 y-radius (sin y-angle)))))
+    (with-pen (make-pen :fill +red+ :stroke +red+)
+      (dotimes (i n-objects)
+        (circle (+ (random center-x) center-x)
+                (+ (random center-y) center-y)
+                (* 1 object-radius))))))
+
+(defsketch arranged-circle
+    ((width 800) (height 600)
+     (center-x (* height 0.3))
+     (center-y (* width  0.5))
+     (n-objects 10)
+     (radius 10)
+     (diff (/ (* 2 PI) n-objects))
+     (angle 0))
+  (background +white+)
+  (with-pen (make-pen :fill +yellow+ :stroke +green+)
+    (dotimes (i n-objects)
+      (let* ((theta (+ angle (* i diff)))
+             (x (+ center-x (* 10 radius (cos theta))))
+             (y (+ center-y (* 10 radius (sin theta)))))
+        (circle x y radius)))))
