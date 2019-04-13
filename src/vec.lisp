@@ -3,19 +3,30 @@
 (defclass vec ()
   ((x :initform 0.0 :initarg :x :accessor x)
    (y :initform 0.0 :initarg :y :accessor y)
-   (r :initform 0.0 :initarg :r)
-   (angle :initform 0.0 :initarg :angle)))
+   (len :initform 0.0 :initarg :len :accessor len)
+   (angle :initform 0.0 :initarg :angle :accessor angle)))
 
 (defun make-vector (x y)
   (let ((length (sqrt (+ (* x x) (* y y))))
         (angle (atan y x)))
-    (make-instance 'vec :x x :y y :r length :angle angle)))
-
+    (make-instance 'vec :x x :y y :len length :angle angle)))
 
 (defmethod print-object ((obj vec) stream)
   (print-unreadable-object (obj stream :type t)
     (with-slots (x y) obj
       (format stream "(~a, ~a)" x y))))
+
+(defun (setf angle) (a vec)
+  (with-slots (x y len angle) vec
+    (setf angle a
+          x (* len (cos a))
+          y (* len (sin a)))))
+
+(defun (setf len) (length vec)
+  (with-slots (x y len angle) vec
+      (setf len length
+            x (* length (cos angle))
+            y (* length (sin angle)))))
 
 ;; '+ is locked in CL. TODO: Shadow and use it.
 (defmethod v+ ((vec1 vec) (vec2 vec))
@@ -33,3 +44,4 @@
 (defmethod v/ ((vec vec) (n number))
   (make-vector (/ (x vec) n)
                (/ (y vec) n)))
+

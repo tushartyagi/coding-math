@@ -14,9 +14,11 @@
 
     :components ((:module "src" :serial t
                           :components ((:file "package")
+                                       (:file "utils")
                                        (:file "intro")
                                        (:file "trig")
                                        (:file "vec")
+                                       (:file "particle")
                                        (:file  "velocity")
                                        (:file "episode-4")
                                        (:file "episode-5")))))
