@@ -1,6 +1,6 @@
 (in-package :coding-math)
 
-(with-sketch particle ((speed 12)
+(with-sketch moving-particle ((speed 12)
                        (xs 0.01)
                        (position (make-vector 10 10))
                        (velocity (make-vector 1 1)))
@@ -21,13 +21,12 @@
                         (particles (fill-particles center-x center-y particle-count)))
   (flet ((update ()
            (dotimes (i particle-count)
-             (update (aref particles i)))))
+             (particle-update (aref particles i)))))
     (update)
     (with-pen (make-pen :fill +black+ :stroke +black+)
       (iterate (for p in-vector particles)
                (with-slots (position) p
                  (circle (x position) (y position) 10))))))
-
 
 (defsketch particles-without-macro
     ((width 800) (height 600)
@@ -44,6 +43,3 @@
       (iterate (for p in-vector particles)
                (with-slots (position) p
                  (circle (x position) (y position) 10))))))
-
-
-
