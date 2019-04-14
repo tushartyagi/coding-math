@@ -21,4 +21,7 @@
                                        (:file "particle")
                                        (:file  "velocity")
                                        (:file "episode-4")
-                                       (:file "episode-5")))))
+                                       (:file "episode-5")
+                                       (:file "episode-9")
+                                       (:file "episode-10")
+                                       (:file "episode-11")))))
