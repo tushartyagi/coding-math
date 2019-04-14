@@ -18,7 +18,6 @@
               (x position) (y position)
               (len velocity) (angle velocity)))))
 
-;; TODO: Remove this particle word from the method names
 (defmethod update ((p particle))
   (with-slots (position velocity) p
     (setf position (v+ position velocity))))

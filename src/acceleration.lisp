@@ -44,11 +44,19 @@
 
 (with-sketch flying-ship ((ship (particle-create center-x center-y 0 0))
                           (thrust (make-vector 0 0)))
-  (with-pen (make-pen :fill +black+ :stroke +black+)
-    (accelerate ship thrust)
-    (update ship)
-    (with-slots (position velocity) ship
-      (circle (x position) (y position) 5))))
+  (flet ((check-borders ()
+           (with-slots (position velocity) ship
+             (with-slots (x y) position
+               (cond ((> x width) (setf x 0))
+                     ((< x 0) (setf x width))
+                     ((> y height) (setf y 0))
+                     ((< y 0) (setf y height)))))))
+    (check-borders)
+    (with-pen (make-pen :fill +black+ :stroke +black+)
+      (accelerate ship thrust)
+      (update ship)
+      (with-slots (position velocity) ship
+        (circle (x position) (y position) 5)))))
 
 (defmethod kit.sdl2:keyboard-event ((window flying-ship) state timestamp repeat-p keysym)
   (with-slots (thrust) window
@@ -73,8 +81,7 @@
             ((sdl2:scancode= (sdl2:scancode-value keysym) :scancode-left)
              (setf x 0))
             ((sdl2:scancode= (sdl2:scancode-value keysym) :scancode-right)
-             (setf x 0))))
-        (print x))))
+             (setf x 0)))))))
 
 
 
