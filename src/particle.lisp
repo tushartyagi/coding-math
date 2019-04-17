@@ -8,7 +8,8 @@
 (defclass particle ()
   ((position :type vec :initarg :position :accessor pos)
    (velocity :type vec :initarg :velocity :accessor vel)
-   (mass :initarg :mass :initform 1 :accessor mass)))
+   (mass :initarg :mass :initform 1.0 :accessor mass)
+   (radius :initarg :radius :initform 0.0 :accessor radius)))
 
 (defun particle-create (x y speed direction)
   (let ((position (make-vector x y))
@@ -38,8 +39,24 @@
 (defmethod particle-y ((p particle))
   (y (pos p)))
 
-;; speed is locked and sbcl gives me warning
-;; Just as well use struct instead of classes
+(defmethod particle-mass ((p particle))
+  (with-slots (mass) p
+    mass))
+
+(defmethod particle-radius ((p particle))
+  (with-slots (radius) p
+    radius))
+
+(defun (setf radius) (new-value particle)
+  (with-slots (radius) particle
+    (setf radius new-value)))
+
+(defun (setf mass) (new-value particle)
+  (with-slots (mass) particle
+    (setf mass new-value)))
+
+;; speed is locked (it's used with optimize) and sbcl gives me warning
+;; Could've just used struct instead of classes
 (defmethod particle-speed ((p particle))
   (len (vel p)))
 

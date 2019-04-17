@@ -73,7 +73,8 @@
       (line 0 7 0 -7)
       (line 0 -7 20 0))))
 
-(defmethod kit.sdl2:keyboard-event ((window flying-ship) state timestamp repeat-p keysym)
+(defmethod kit.sdl2:keyboard-event ((window accelerating-ship) state timestamp repeat-p keysym)
+  (declare (ignore timestamp repeat-p))
   (with-slots (thrust thrusting turning-left turning-right) window
       (with-slots (x y) thrust
         (when (eql state :keydown)

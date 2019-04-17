@@ -24,4 +24,5 @@
                                        (:file "episode-5")
                                        (:file "episode-9")
                                        (:file "episode-10")
-                                       (:file "episode-11")))))
+                                       (:file "episode-11")
+                                       (:file "episode-12")))))
