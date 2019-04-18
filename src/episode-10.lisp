@@ -1,7 +1,7 @@
 (in-package :coding-math)
 
 (with-sketch flying-ship ((ship (particle-create center-x center-y 0 0))
-                          (thrust (make-vector 0 0))
+                          (thrust (vector-create 0 0))
                           (angle 0))
   (flet ((check-borders ()
            (with-slots (position velocity) ship
@@ -43,7 +43,7 @@
              (setf x 0)))))))
 
 (with-sketch accelerating-ship ((ship (particle-create center-x center-y 0 0))
-                          (thrust (make-vector 0 0))
+                          (thrust (vector-create 0 0))
                           (angle 0)
                           (turning-left nil)
                           (turning-right nil)

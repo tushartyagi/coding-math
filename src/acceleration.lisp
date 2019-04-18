@@ -1,7 +1,7 @@
 (in-package :coding-math)
 
 (with-sketch accelerating-particle ((p (particle-create 10 height 10 (* -1 (/ PI 2))))
-                          (accel (make-vector 0.1 0.1)))
+                          (accel (vector-create 0.1 0.1)))
   (flet ((update ()
            (accelerate p accel)
            (update p)))
@@ -16,7 +16,7 @@
      (speed 12) (xs 0.01)
      (particle-count 100)
      (particles (fill-particles center-x center-y particle-count))
-     (gravity (make-vector 0 0.1)))
+     (gravity (vector-create 0 0.1)))
   (background +white+)
   (flet ((update-frame ()
            (dotimes (i particle-count)

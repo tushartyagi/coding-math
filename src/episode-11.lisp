@@ -11,4 +11,4 @@
     (circle center-x center-y 20))
 
   (with-pen (make-pen :fill +green+ :stroke +green+)
-    (circle (particle-x planet) (particle-y planet) 10)))
+    (circle (x planet) (y planet) 10)))

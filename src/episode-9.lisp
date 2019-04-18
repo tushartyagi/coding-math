@@ -2,7 +2,7 @@
 
 (with-sketch fireworks ((particle-count 100)
                         (particles (fill-particles center-x center-y particle-count))
-                        (gravity (make-vector 0 0.1)))
+                        (gravity (vector-create 0 0.1)))
   (flet ((update-frame ()
            (dotimes (i particle-count)
              (accelerate (aref particles i) gravity)

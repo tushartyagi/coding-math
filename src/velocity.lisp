@@ -2,8 +2,8 @@
 
 (with-sketch moving-particle ((speed 12)
                        (xs 0.01)
-                       (position (make-vector 10 10))
-                       (velocity (make-vector 1 1)))
+                       (position (vector-create 10 10))
+                       (velocity (vector-create 1 1)))
   (setf position (v+ position velocity))
   (with-pen (make-pen :fill +black+ :stroke +black+)
     (circle (x position) (y position) 10)))
