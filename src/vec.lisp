@@ -16,6 +16,14 @@
     (with-slots (x y) obj
       (format stream "(~a, ~a)" x y))))
 
+(defun (setf x) (new-value vec)
+  (with-slots (x) vec
+    (setf x new-value)))
+
+(defun (setf y) (new-value vec)
+  (with-slots (y) vec
+    (setf y new-value)))
+
 (defun (setf angle) (a vec)
   (with-slots (x y len angle) vec
     (setf angle a

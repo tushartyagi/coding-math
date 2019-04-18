@@ -9,7 +9,8 @@
   ((position :type vec :initarg :position :accessor pos)
    (velocity :type vec :initarg :velocity :accessor vel)
    (mass :initarg :mass :initform 1.0 :accessor mass)
-   (radius :initarg :radius :initform 0.0 :accessor radius)))
+   (radius :initarg :radius :initform 0.0 :accessor radius)
+   (bounce :initarg :bounce :initform 1 :accessor bounce)))
 
 (defun particle-create (x y speed direction)
   (let ((position (make-vector x y))
@@ -47,6 +48,22 @@
   (with-slots (radius) p
     radius))
 
+(defmethod particle-bounce ((p particle))
+  (with-slots (bounce) p
+    bounce))
+
+(defun (setf particle-bounce) (new-value particle)
+  (with-slots (bounce) particle
+    (setf bounce new-value)))
+
+(defun (setf particle-x) (new-value particle)
+  (with-slots (position) particle
+    (setf (x position) new-value)))
+
+(defun (setf particle-y) (new-value particle)
+  (with-slots (position) particle
+    (setf (y position) new-value)))
+
 (defun (setf radius) (new-value particle)
   (with-slots (radius) particle
     (setf radius new-value)))
@@ -54,6 +71,14 @@
 (defun (setf mass) (new-value particle)
   (with-slots (mass) particle
     (setf mass new-value)))
+
+(defun (setf speed) (new-value particle)
+  (with-slots (velocity) particle
+    (setf (len velocity) new-value)))
+
+(defun (setf direction) (new-value particle)
+  (with-slots (velocity) particle
+    (setf (angle velocity) new-value)))
 
 ;; speed is locked (it's used with optimize) and sbcl gives me warning
 ;; Could've just used struct instead of classes
