@@ -1,12 +1,8 @@
 (in-package :coding-math)
 
-(with-sketch wrapping-up ((sun (particle-create center-x center-y 0 0)))
-
-  (update planet)
-
+(with-sketch wrapping-up ((planet (particle-create center-x center-y 0 0)))
   (with-pen (make-pen :fill +yellow+ :stroke +orange+)
     (circle center-x center-y 20))
-
   (with-pen (make-pen :fill +green+ :stroke +green+)
     (circle (particle-x planet) (particle-y planet) 10)))
 

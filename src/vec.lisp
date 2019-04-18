@@ -60,3 +60,11 @@
       (setf (y vec1) y)
       (setf (len vec1) len)
       (setf (angle vec1) angle))))
+
+(defmethod v-= ((vec1 vec) (vec2 vec))
+  (let ((new-v (v- vec1 vec2)))
+    (with-slots (x y len angle) new-v
+      (setf (x vec1) x)
+      (setf (y vec1) y)
+      (setf (len vec1) len)
+      (setf (angle vec1) angle))))

@@ -40,6 +40,9 @@
 (defmethod particle-y ((p particle))
   (y (pos p)))
 
+(defmethod particle-velocity ((p particle))
+  (vel p))
+
 (defmethod particle-mass ((p particle))
   (with-slots (mass) p
     mass))
@@ -64,19 +67,19 @@
   (with-slots (position) particle
     (setf (y position) new-value)))
 
-(defun (setf radius) (new-value particle)
+(defun (setf particle-radius) (new-value particle)
   (with-slots (radius) particle
     (setf radius new-value)))
 
-(defun (setf mass) (new-value particle)
+(defun (setf particle-mass) (new-value particle)
   (with-slots (mass) particle
     (setf mass new-value)))
 
-(defun (setf speed) (new-value particle)
+(defun (setf particle-speed) (new-value particle)
   (with-slots (velocity) particle
     (setf (len velocity) new-value)))
 
-(defun (setf direction) (new-value particle)
+(defun (setf particle-direction) (new-value particle)
   (with-slots (velocity) particle
     (setf (angle velocity) new-value)))
 
