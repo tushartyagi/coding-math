@@ -38,11 +38,11 @@
   (vector-create (- (x vec1) (x vec2))
                  (- (y vec1) (y vec2))))
 
-(defmethod v* ((vec vec) (n number))
+(defmethod v* ((vec vec) (n real))
   (vector-create (* n (x vec))
                  (* n (y vec))))
 
-(defmethod v/ ((vec vec) (n number))
+(defmethod v/ ((vec vec) (n real))
   (vector-create (/ (x vec) n)
                  (/ (y vec) n)))
 
@@ -56,6 +56,14 @@
 
 (defmethod v-= ((vec1 vec) (vec2 vec))
   (let ((new-v (v- vec1 vec2)))
+    (with-slots (x y len angle) new-v
+      (setf (x vec1) x)
+      (setf (y vec1) y)
+      (setf (len vec1) len)
+      (setf (angle vec1) angle))))
+
+(defmethod v*= ((vec1 vec) (n real))
+  (let ((new-v (v* vec1 n)))
     (with-slots (x y len angle) new-v
       (setf (x vec1) x)
       (setf (y vec1) y)
