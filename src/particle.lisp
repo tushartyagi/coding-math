@@ -10,6 +10,7 @@
    (velocity :type vec :initarg :velocity :accessor velocity)
    (mass :initarg :mass :initform 1.0 :accessor mass)
    (radius :initarg :radius :initform 0.0 :accessor radius)
+   (gravity :initarg :gravity :initform  0.0 :accessor gravity)
    (bounce :initarg :bounce :initform 1 :accessor bounce)
    (friction :initarg :friction :initform 0 :accessor friction)))
 
@@ -20,18 +21,20 @@
               (x position) (y position)
               (len velocity) (angle velocity)))))
 
-(defun particle-create (x y speed direction &optional (radius 0.0) (mass 1.0) (friction 0))
+(defun particle-create (x y speed direction &optional (radius 0.0) (mass 1.0) (friction 0) (gravity 0))
   (let ((position (vector-create x y))
-        (velocity (vector-create 0 0)))
+        (velocity (vector-create 0 0))
+        (gravity (vector-create 0 gravity)))
     (setf (angle velocity) direction)
     (setf (len velocity) speed)
     (make-instance 'particle :position position
-                   :velocity velocity :radius radius :mass mass :friction friction)))
+                   :velocity velocity :radius radius :mass mass :friction friction :gravity gravity)))
 
 (defmethod update ((p particle))
-  (with-slots (position velocity friction) p
+  (with-slots (position velocity friction gravity) p
     (setf velocity (v* velocity friction))
-    (setf position (v+ position velocity))))
+    (setf position (v+ position velocity))
+    (setf velocity (v+ velocity gravity))))
 
 (defmethod accelerate ((p particle) (v vec))
   (with-slots (velocity) p

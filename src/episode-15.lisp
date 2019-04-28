@@ -1,10 +1,12 @@
 (in-package :coding-math)
 
 (with-sketch spring ((spring-point (vector-create center-x center-y))
-                       (k 0.5)
+                     (k 0.5)
                      (weight (particle-create (random center-x) (random center-y)
                                               50 (* 2 (random (* pi 2))) 10 10 0.9)))
 
+  ;; Giving the spring an initial distance from which it is decompressed,
+  ;; the force follows Hooke's law where F = -(k * distance)
   (let* ((distance (v- spring-point (pos weight)))
          (spring-force (v* distance k)))
     (with-pen (make-pen :fill +black+ :stroke +black+)
