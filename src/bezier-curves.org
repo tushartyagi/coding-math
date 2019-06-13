@@ -1,0 +1,33 @@
+#+TITLE: Bezier Curves
+#+AUTHOR: Tushar Tyagi
+#+EMAIL: mail@tushartyagi.com
+#+LANGUAGE: en
+#+PROPERTY: header-args :tangle bezier-curves.lisp
+
+#+name: package-init
+#+begin_src lisp :session coding-math :results none
+  (ql:quickload :coding-math)
+  (in-package :coding-math)
+#+end_src
+
+
+* Pronunciation
+
+  *Bez-ee-ay*
+
+
+* Concepts
+
+  Bezier Curves works on the concept of *Linear Interpolation*, which means that
+  we have the lower and upper ends of some range, and we need to fit it
+  additional values to the range. It's like filling the holes between the range
+  using some values. The value which fills the holes is called the
+  *interpolated* value.
+
+  This would be a lot like string interpolation wherein we plug in the holes of
+  the string using some known value.
+
+
+
+
+

@@ -1,0 +1,13 @@
+#+TITLE: Particles
+#+AUTHOR: Tushar Tyagi
+#+EMAIL: mail@tushartyagi.com
+#+LANGUAGE: en
+#+PROPERTY: header-args :tangle particles.lisp
+
+#+name: package-init
+#+begin_src lisp :session coding-math :results none
+  (ql:quickload :coding-math)
+  (in-package :coding-math)
+#+end_src
+
+
